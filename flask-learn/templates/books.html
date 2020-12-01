@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="POST">
+      作者： <input type="text" name="author" />
+      <br />
+      书籍： <input type="text" name="book" />
+      <br />
+      <input type="submit" value="submit" />
+    </form>
+    <br />
+    {% for msg in get_flashed_messages()%} {{msg}} {%endfor%}
+    <br />
+    <hr />
+
+    <ul>
+      {% for author in authors%}
+      <li>
+        {{author.name}}
+        <a href="{{url_for('delete_author',id=author.id)}}">删除</a>
+      </li>
+      <ul>
+        {% for book in author.books %}
+        <li>
+          {{book.name}} <a href="{{url_for('delete_book',id=book.id)}}">删除</a>
+        </li>
+        {% else %}
+        <li>无</li>
+        {%endfor%}
+      </ul>
+      {%endfor%}
+    </ul>
+  </body>
+</html>
